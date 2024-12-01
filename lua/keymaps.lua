@@ -20,6 +20,15 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- For edifact
+vim.api.nvim_set_keymap('n', '<F2>', [[:%s/'/&\r/g<CR>]], { noremap = true, silent = true })
+
+-- For X12
+vim.api.nvim_set_keymap('n', '<F3>', [[:%s/~/&\r/g<CR>]], { noremap = true, silent = true })
+
+-- Toggle line number modes
+vim.api.nvim_set_keymap('n', '<F4>', [[:lua vim.wo.relativenumber = not vim.wo.relativenumber vim.wo.number = true<CR>]], { noremap = true, silent = true })
+
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
