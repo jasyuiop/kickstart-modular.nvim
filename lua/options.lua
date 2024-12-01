@@ -4,10 +4,10 @@
 --  For more options, you can see `:help option-list`
 
 -- Make line numbers default
-vim.opt.number = true
+--vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -23,11 +23,28 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
+if vim.fn.has 'wsl' == 1 then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+    paste = {
+      ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
+
 -- Enable break indent
 vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
+vim.opt.swapfile = false
+vim.opt.backup = false
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -56,10 +73,24 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
+-- nowrap
+vim.o.wrap = false
+
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Start at last place you were editing
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = vim.api.nvim_create_augroup('LastPlace', { clear = true }),
+  callback = function()
+    local last_pos = vim.fn.line '\'"'
+    if last_pos > 1 and last_pos <= vim.fn.line '$' then
+      vim.cmd 'normal! g\'"'
+    end
+  end,
+})
+--
 -- vim: ts=2 sts=2 sw=2 et
