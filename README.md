@@ -14,6 +14,17 @@ A starting point for Neovim that is:
 
 ## Installation
 
+### Summarize
+```sh
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update
+sudo apt install make gcc ripgrep fzf unzip git xclip neovim
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+nvm install --lts
+npm i -g bash-language-server
+```
+> https://www.nerdfonts.com/ get fonts
+
 ### Install Neovim
 
 Kickstart.nvim targets *only* the latest
