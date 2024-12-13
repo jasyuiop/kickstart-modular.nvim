@@ -102,14 +102,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 -- Set syntax for EDIFACT
-vim.api.nvim_create_autocmd('BufReadPost', {
-  callback = function()
-    -- Read
-    local lines = vim.fn.getline(1, 2)
-    if lines[1]:match '^UNB' or lines[2]:match '^UNB' then
-      vim.bo.filetype = 'edifact'
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--   callback = function()
+--     -- Read
+--     local lines = vim.fn.getline(1, 2)
+--     if lines[1]:match '^UNB' or lines[2]:match '^UNB' then
+--       vim.bo.filetype = 'edifact'
+--     end
+--   end,
+-- })
 --
 -- vim: ts=2 sts=2 sw=2 et
