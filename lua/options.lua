@@ -73,8 +73,8 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
--- nowrap
-vim.o.wrap = false
+-- wrap
+vim.o.wrap = true
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
