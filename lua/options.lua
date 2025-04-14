@@ -73,7 +73,9 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- wrap
-vim.o.wrap = true
+vim.o.wrap = false
+
+vim.o.textwidth = 72
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true

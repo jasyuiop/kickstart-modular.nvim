@@ -16,6 +16,19 @@ return {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      local trim_group = vim.api.nvim_create_augroup('MiniTrailspaceTrimOnSave', { clear = true })
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = trim_group,
+        pattern = '*',
+        callback = function()
+          local trailspace_loaded, _ = pcall(require, 'mini.trailspace')
+          if trailspace_loaded then
+            pcall(MiniTrailspace.trim)
+            pcall(MiniTrailspace.trim_last_lines)
+          end
+        end,
+      })
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -24,6 +37,8 @@ return {
       -- set use_icons to true if you have a Nerd Font
       statusline.setup { use_icons = vim.g.have_nerd_font }
 
+      -- Trailing lines
+      require('mini.trailspace').setup()
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN

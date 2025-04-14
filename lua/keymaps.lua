@@ -29,6 +29,7 @@ vim.api.nvim_set_keymap('n', '<F3>', [[:%s/~/&\r/g<CR>]], { noremap = true, sile
 -- Toggle line number modes
 vim.api.nvim_set_keymap('n', '<F4>', [[:lua vim.wo.relativenumber = not vim.wo.relativenumber vim.wo.number = true<CR>]], { noremap = true, silent = true })
 
+-- Toggle wrap
 vim.api.nvim_set_keymap('n', '<F5>', [[:lua vim.wo.wrap = not vim.wo.wrap<CR>]], { noremap = true, silent = true })
 
 -- TIP: Disable arrow keys in normal mode
